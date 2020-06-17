@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block head %}
+	<title>{% trans "PSNB" %}</title>
+	{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div id="app" style="margin-top: 60px;">
+    <el-row>
+        <el-col :span="20" :offset="2">
+            <el-row :gutter="40">
+                <el-col :span="12">
+                    <el-form label-width="100px">
+                        <el-form-item label="图书SN">
+                            <el-input v-model="bookSn" placeholder="请输入内容" clearable></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <el-form label-width="100px">
+                        <el-form-item label="结果">
+                            <pre style="overflow:auto;max-height:600px;white-space: pre-wrap;word-wrap: break-word;">
+                                [[ bookResult ]]
+                            </pre>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+                <el-col :span="8">
+                    <el-form label-width="100px">
+                        <el-form-item>
+                            <el-button type="primary" @click="getSearch" icon="el-icon-search">搜索</el-button>
+                        </el-form-item>
+                    </el-form>
+                    <el-form label-width="100px">
+                        <el-form-item>
+                            <el-link icon="el-icon-document-copy" :underline="false" @click="copyAll">复制内容
+                            </el-link>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                bookSn: '',
+                bookResult: '',
+                test: 'hahahahaha',
+
+            },
+            computed: {},
+            watch: {
+            },
+            create() {},
+            mounted() {
+            },
+            methods: {
+                getSearch() {
+                    let params = {
+                        "sn": this.bookSn
+                    }
+                    axios.get('book/', {params: params}).then(res => {
+                        console.log(res)
+                        if (res.data.result) {
+                            this.bookResult = res.data.data
+                            this.$message.success('查询成功')
+                        }
+                    })
+                },
+                copyAll() {
+                    let transfer = document.createElement('input');
+                    document.body.appendChild(transfer);
+                    console.log(this.bookResult)
+                    transfer.value = this.bookResult.toString();  // 这里表示想要复制的内容
+                    transfer.focus();
+                    transfer.select();
+                    if (document.execCommand('copy')) {
+                        document.execCommand('copy');
+                    }
+                    transfer.blur();
+                    console.log('复制成功');
+                    document.body.removeChild(transfer);
+                }
+            }
+        })
+    }
+</script>
+<style>
+</style>
+{% endblock %}

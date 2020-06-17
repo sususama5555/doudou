@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from .views import book_info_search
+import views
 
 urlpatterns = [
+    url(r'^$', views.home),
     url(r'^admin/', admin.site.urls),
-    url(r'^book/', book_info_search),
+    url(r'^book/', views.book_info_search),
 ]

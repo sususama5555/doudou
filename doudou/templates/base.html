@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title>PSNB</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <!--前端VUE改造 -->
+<!--    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}custom/element.css">-->
+<!--    <script src="{{ STATIC_URL }}/custom/vue.min.js"></script>-->
+<!--    <script src="{{ STATIC_URL }}custom/axios.min.js"></script>-->
+<!--    <script src="{{ STATIC_URL }}custom/element.js"></script>-->
+<!--    <script src="{{ STATIC_URL }}custom/echarts.js"></script>-->
+<!--    <link rel="stylesheet" href="{{ STATIC_URL }}custom/index.css">-->
+<!--    <script src="{{ STATIC_URL }}custom/echartsFun/index.js"></script>-->
+    <style>
+        /*如果你需要给你的应用固定高度和宽度，请在这里修改*/
+        body {
+            min-width: 1202px;
+        }
+
+        .container {
+            width: auto;
+            min-width: 1200px;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+</body>
+{% block extra_block %}
+<!--
+    这里放置子页面中附加内容，一般为js，注意子模版中的js如果使用到以上js库，必须放置在这里
+ -->
+{% endblock %}
+</html>

@@ -54,7 +54,7 @@ ROOT_URLCONF = 'doudou.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'doudou/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
